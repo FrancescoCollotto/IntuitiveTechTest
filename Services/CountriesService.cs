@@ -1,7 +1,6 @@
-﻿using IntuitiveTechTest.Services;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
-namespace IntuitiveTechTest;
+namespace IntuitiveTechTest.Services;
 
 public class CountriesService : ICountriesService
 {

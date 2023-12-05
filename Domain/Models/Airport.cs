@@ -14,7 +14,7 @@ public class Airport
   public Country? Country { get; set; }
   public AirportType? AirportType { get; set; }
 
-  public ICollection<Route>? DepartureRoutes { get; set; }
-  public ICollection<Route>? ArrivalRoutes { get; set; }
-  public ICollection<AirportGroupJunction>? AirportGroupJunctions { get; set; }
+  public ICollection<Route> DepartureRoutes { get; set; } = new List<Route>();
+  public ICollection<Route> ArrivalRoutes { get; set; } = new List<Route>();
+  public ICollection<AirportGroupJunction> AirportGroupJunctions { get; set; } = new List<AirportGroupJunction>();
 }

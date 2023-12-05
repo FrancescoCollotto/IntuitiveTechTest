@@ -8,5 +8,5 @@ public class Country
   [Required]
   public string? Name { get; set; }
 
-  public ICollection<Airport>? Airports { get; set; }
+  public ICollection<Airport> Airports { get; set; } = new List<Airport>();
 }

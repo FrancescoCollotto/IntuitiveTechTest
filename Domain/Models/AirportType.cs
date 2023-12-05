@@ -8,5 +8,5 @@ public class AirportType
   [Required]
   public string? Type { get; set; }
 
-  public ICollection<Airport>? Airports { get; set; }
+  public ICollection<Airport> Airports { get; set; } = new List<Airport>();
 }

@@ -15,6 +15,8 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IAirportsService, AirportsService>();
 builder.Services.AddScoped<ICountriesService, CountriesService>();
+builder.Services.AddScoped<IRoutesService, RoutesService>();
+builder.Services.AddScoped<IGroupRoutesService, GroupRoutesService>();
 
 var app = builder.Build();
 
