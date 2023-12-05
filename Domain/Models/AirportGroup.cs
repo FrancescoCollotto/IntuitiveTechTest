@@ -8,5 +8,7 @@ public class AirportGroup
   [Required]
   public string? Name { get; set; }
 
+  public ICollection<GroupRoute>? DepartureGroupRoutes { get; set; }
+  public ICollection<GroupRoute>? ArrivalGroupRoutes { get; set; }
   public ICollection<AirportGroupJunction>? AirportGroupJunctions { get; set; }
 }

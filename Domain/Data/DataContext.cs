@@ -12,6 +12,7 @@ public class DataContext : DbContext
   public DbSet<Route> Routes { get; set; }
   public DbSet<AirportGroup> AirportGroups { get; set; }
   public DbSet<AirportGroupJunction> AirportGroupJunctions { get; set; }
+  public DbSet<GroupRoute> GroupRoutes { get; set; }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
@@ -51,6 +52,22 @@ public class DataContext : DbContext
         .IsUnique();
 
     modelBuilder.Entity<AirportGroupJunction>()
-      .HasKey(agj => new { agj.AirportId, agj.AirportGroupId });
+        .HasKey(agj => new { agj.AirportId, agj.AirportGroupId });
+
+    modelBuilder.Entity<GroupRoute>()
+        .HasOne(gr => gr.DepartureAirportGroup)
+        .WithMany(ag => ag.DepartureGroupRoutes)
+        .HasForeignKey(gr => gr.DepartureAirportGroupId)
+        .OnDelete(DeleteBehavior.Restrict);
+
+    modelBuilder.Entity<GroupRoute>()
+        .HasOne(gr => gr.ArrivalAirportGroup)
+        .WithMany(ag => ag.ArrivalGroupRoutes)
+        .HasForeignKey(gr => gr.ArrivalAirportGroupId)
+        .OnDelete(DeleteBehavior.Restrict);
+
+    modelBuilder.Entity<GroupRoute>()
+        .HasIndex(gr => new { gr.DepartureAirportGroupId, gr.ArrivalAirportGroupId })
+        .IsUnique();
   }
 }
