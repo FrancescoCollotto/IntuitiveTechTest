@@ -13,6 +13,13 @@ public class RoutesService : IRoutesService
     this.context = context;
   }
 
+  public async Task<List<AirportRouteResponse>> ListAsync()
+  {
+    var routes = await context.Routes.ToListAsync();
+
+    return routes.Select(r => (AirportRouteResponse)r).ToList();
+  }
+
   public async Task AddAsync(int departureAirportId, int arrivalAirportId)
   {
     if (departureAirportId == arrivalAirportId)

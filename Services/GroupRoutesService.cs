@@ -13,6 +13,13 @@ public class GroupRoutesService : IGroupRoutesService
     this.context = context;
   }
 
+  public async Task<List<GroupRouteResponse>> ListAsync()
+  {
+    var groupRoutes = await context.GroupRoutes.ToListAsync();
+
+    return groupRoutes.Select(gr => (GroupRouteResponse)gr).ToList();
+  }
+
   public async Task AddAsync(int departureAirportGroupId, int arrivalAirportGroupId)
   {
     if (departureAirportGroupId == arrivalAirportGroupId)

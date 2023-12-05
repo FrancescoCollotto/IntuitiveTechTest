@@ -22,9 +22,18 @@ public class RoutesController : ControllerBase
   }
 
   [HttpGet]
-  public async Task<ActionResult> ListAsync()
+  public async Task<ActionResult<RoutesResponse>> ListAsync()
   {
-    throw new NotImplementedException();
+    var airportRoutesResponse = await routesService.ListAsync();
+    var groupRouteResponse = await groupRoutesService.ListAsync();
+
+    var routesResponse = new RoutesResponse
+    {
+      AirportRoutes = airportRoutesResponse,
+      AirportGroupRoutes = groupRouteResponse
+    };
+
+    return Ok(routesResponse);
   }
 
   [HttpPost]
