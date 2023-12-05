@@ -9,6 +9,7 @@ public class DataContext : DbContext
   public DbSet<Airport> Airports { get; set; }
   public DbSet<Country> Countries { get; set; }
   public DbSet<AirportType> AirportTypes { get; set; }
+  public DbSet<Route> Routes { get; set; }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
@@ -30,5 +31,21 @@ public class DataContext : DbContext
       new Airport { Id = 2, IATACode = "PMI", CountryId = 2, AirportTypeId = 3 },
       new Airport { Id = 3, IATACode = "LAX", CountryId = 3, AirportTypeId = 3 }
     );
+
+    modelBuilder.Entity<Route>()
+        .HasOne(r => r.DepartureAirport)
+        .WithMany(a => a.DepartureRoutes)
+        .HasForeignKey(r => r.DepartureAirportId)
+        .OnDelete(DeleteBehavior.Restrict);
+
+    modelBuilder.Entity<Route>()
+        .HasOne(r => r.ArrivalAirport)
+        .WithMany(a => a.ArrivalRoutes)
+        .HasForeignKey(r => r.ArrivalAirportId)
+        .OnDelete(DeleteBehavior.Restrict);
+
+    modelBuilder.Entity<Route>()
+        .HasIndex(r => new { r.DepartureAirportId, r.ArrivalAirportId })
+        .IsUnique();
   }
 }

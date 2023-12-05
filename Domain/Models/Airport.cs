@@ -13,4 +13,7 @@ public class Airport
 
   public Country? Country { get; set; }
   public AirportType? AirportType { get; set; }
+
+  public ICollection<Route>? DepartureRoutes { get; set; }
+  public ICollection<Route>? ArrivalRoutes { get; set; }
 }
