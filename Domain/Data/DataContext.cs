@@ -10,6 +10,8 @@ public class DataContext : DbContext
   public DbSet<Country> Countries { get; set; }
   public DbSet<AirportType> AirportTypes { get; set; }
   public DbSet<Route> Routes { get; set; }
+  public DbSet<AirportGroup> AirportGroups { get; set; }
+  public DbSet<AirportGroupJunction> AirportGroupJunctions { get; set; }
 
   protected override void OnModelCreating(ModelBuilder modelBuilder)
   {
@@ -47,5 +49,8 @@ public class DataContext : DbContext
     modelBuilder.Entity<Route>()
         .HasIndex(r => new { r.DepartureAirportId, r.ArrivalAirportId })
         .IsUnique();
+
+    modelBuilder.Entity<AirportGroupJunction>()
+      .HasKey(agj => new { agj.AirportId, agj.AirportGroupId });
   }
 }

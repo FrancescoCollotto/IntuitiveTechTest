@@ -16,4 +16,5 @@ public class Airport
 
   public ICollection<Route>? DepartureRoutes { get; set; }
   public ICollection<Route>? ArrivalRoutes { get; set; }
+  public ICollection<AirportGroupJunction>? AirportGroupJunctions { get; set; }
 }
