@@ -21,4 +21,32 @@ public class CountriesController : ControllerBase
 
     return Ok(countries);
   }
+
+  [HttpPost]
+  public async Task<ActionResult<CountryResponse?>> AddAsync(AddCountryRequest addCountryRequest)
+  {
+    try
+    {
+      var country = await countriesService.AddAsync(addCountryRequest);
+      return Ok(country);
+    }
+    catch(BadDataException ex)
+    {
+      return BadRequest(ex.Message);
+    }
+  }
+
+  [HttpDelete("{id}")]
+  public async Task<ActionResult> DeleteAsync([FromRoute]int id)
+  {
+    try
+    {
+      await countriesService.DeleteAsync(id);
+      return Ok("Country deleted.");
+    }
+    catch(BadDataException ex)
+    {
+      return BadRequest(ex.Message);
+    }
+  }
 }
